@@ -32,4 +32,6 @@ public class CustomerModel {
     WarrantyModel warranty;
     @ManyToMany
     private List<CustomerPromotions> customerPromotions;
+    @ManyToOne
+    private PaymentModel payment;
 }

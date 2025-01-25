@@ -1,14 +1,8 @@
 package com.example.customerregwithjpa.service;
 
 
-import com.example.customerregwithjpa.dao.CustomerDao;
-import com.example.customerregwithjpa.dao.CustomerPromotionsRepo;
-import com.example.customerregwithjpa.dao.ProductRepo;
-import com.example.customerregwithjpa.dao.WarrantRepo;
-import com.example.customerregwithjpa.model.CustomerModel;
-import com.example.customerregwithjpa.model.CustomerPromotions;
-import com.example.customerregwithjpa.model.Product;
-import com.example.customerregwithjpa.model.WarrantyModel;
+import com.example.customerregwithjpa.dao.*;
+import com.example.customerregwithjpa.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +16,14 @@ public class CustomerService {
     private final ProductRepo productRepo;
     private final WarrantRepo warrantRepo;
     private final CustomerPromotionsRepo customerPromotionsRepo;
+    private final PaymentMethodRepo paymentMethodRepo;
 
     public CustomerModel createCustomer(CustomerModel customerModel){
         List<Product> products = customerModel.getProduct();
         WarrantyModel warrantyModel =  customerModel.getWarranty();
         List<CustomerPromotions> customerPromotions = customerModel.getCustomerPromotions();
+        PaymentModel paymentModel = customerModel.getPayment();
+        paymentMethodRepo.save(paymentModel);
         customerPromotionsRepo.saveAll(customerPromotions);
         warrantRepo.save(warrantyModel);
         productRepo.saveAll(products);

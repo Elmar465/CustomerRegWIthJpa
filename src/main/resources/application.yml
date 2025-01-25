@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: CustomerRegWithJpa
+
+  datasource:
+    username: pa
+    url: jdbc:h2:./productdb
+
+  h2:
+    console:
+      enabled: true
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    generate-ddl: true
+    show-sql: true

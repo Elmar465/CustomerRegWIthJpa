@@ -2,9 +2,17 @@ package com.example.customerregwithjpa.model;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Table(name = "Customer")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class CustomerModel {
 
     @Id
@@ -18,56 +26,10 @@ public class CustomerModel {
     private String email;
     @Column(unique = true,name = "password")
     private Integer password;
-
-
-
-    //Get ID
-    public Integer getId() {
-        return id;
-    }
-
-    //Getter
-    public String getName() {
-        return name;
-    }
-
-    //Setter
-    public void setName(String name){
-        this.name = name;
-    }
-
-    //Getter
-    public String getLastName(){
-        return lastName;
-    }
-
-
-    //Setter
-    public void setLastName(String lastName){
-        this.lastName = lastName;
-    }
-
-
-    //Getter
-    public String getEmail() {
-        return email;
-    }
-
-
-    //Setter
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    //Getter
-    public Integer getPassword() {
-        return password;
-    }
-
-    //Setter
-    public void setPassword(Integer password) {
-        this.password = password;
-    }
-
-
+    @OneToMany
+    List<Product> product;
+    @OneToOne
+    WarrantyModel warranty;
+    @ManyToMany
+    private List<CustomerPromotions> customerPromotions;
 }
